@@ -1,28 +1,4 @@
 Q1回答
-mysql> SHOW DATABASES;
-+--------------------+
-| Database           |
-+--------------------+
-| db_lesson          |
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-5 rows in set (0.01 sec)
-
-mysql> USE db_lesson;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
-
-Database changed
-mysql>  SHOW TABLES;
-+---------------------+
-| Tables_in_db_lesson |
-+---------------------+
-| people              |
-| reports             |
-+---------------------+1 rows in set (0.00 sec)
 
 mysql> CREATE TABLE departments (
        department_id INT unsigned AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -45,36 +21,7 @@ mysql> DESC departments;
 
 
 
-Q2回答e
-mysql>  SHOW DATABASES;
-+--------------------+
-| Database           |
-+--------------------+
-| db_lesson          |
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-5 rows in set (0.00 sec)
-
-mysql> USE db_lesson;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
-
-Database changed
-mysql> SHOW TABLES;
-+---------------------+
-| Tables_in_db_lesson |
-+---------------------+
-| departments         |
-| people              |
-| reports             |
-+---------------------+
-3 rows in set (0.01 sec)
-
-mysql> use people
-ERROR 1049 (42000): Unknown database 'people'
+Q2回答
 mysql> DESC people;
 +------------+------------------+------+-----+-------------------+-----------------------------------------------+
 | Field      | Type             | Null | Key | Default           | Extra                                         |
@@ -140,16 +87,16 @@ Records: 5  Duplicates: 0  Warnings: 0
 
 INSERT INTO people (name, email, department_id, age, gender)
 VALUES
-   ('歌仙兼定', 'kasen@gizumo.jp','1', 31,1),
-   ('和泉守兼定', 'izuminokami@gizumo.jp','2', 29,1),
-   ('燭台切光忠', 'shokudaigiri@gizumo.jp', '1', 31, 1),
-   ('へし切長谷部', 'hesikiri@gizumo.co.jp','2', 28,1),
-   ('山姥切長義','chogi@gizumo.co.jp','4',26,1),
+   ('歌仙兼定', 'kasen@gizumo.jp',1, 31,1),
+   ('和泉守兼定', 'izuminokami@gizumo.jp',2, 29,1),
+   ('燭台切光忠', 'shokudaigiri@gizumo.jp', 1, 31, 1),
+   ('へし切長谷部', 'hesikiri@gizumo.co.jp',2, 28,1),
+   ('山姥切長義','chogi@gizumo.co.jp',4,26,1),
    ('一文字則宗', NULL,'5',NULL,NULL),
-   ('山姥切国広','kinihiro@gizumo.jp','1',26,1),
-   ('松井江','matuigou@gizumo.jp','3',25,1),
-   ('肥前忠弘','hizen@gizumo.co.jp','2',24,1),
-   ('南海太郎朝尊','nannkai@gizumo.co.jp','2',35,1);
+   ('山姥切国広','kinihiro@gizumo.jp',1,26,1),
+   ('松井江','matuigou@gizumo.jp',3,25,1),
+   ('肥前忠弘','hizen@gizumo.co.jp',2,24,1),
+   ('南海太郎朝尊','nannkai@gizumo.co.jp',2,35,1);
 
 INSERT INTO  reports (person_id,content,created_at,updated_at)
      VALUES
@@ -355,22 +302,27 @@ mysql> SELECT * FROM people WHERE gender = 1;
 +-----------+--------------------+------------------------+---------------+------+--------+---------------------+---------------------+
 11 rows in set (0.00 sec)
 
-mysql> SELECT * FROM people WHERE gender = 1 ORDER BY age DESC;
-+-----------+--------------------+------------------------+---------------+------+--------+---------------------+---------------------+
-| person_id | name               | email                  | department_id | age  | gender | created_at          | updated_at          |
-+-----------+--------------------+------------------------+---------------+------+--------+---------------------+---------------------+
-|        30 | 早坂てつお         | hayasaka@gizumo.co.jp  |             3 |   61 |      1 | 2025-01-22 15:01:39 | 2025-01-22 16:08:57 |
-|        28 | 福田だいすけ       | fukuda@gizumo.jp       |             2 |   42 |      1 | 2025-01-22 15:01:39 | 2025-01-22 16:07:25 |
-|        41 | 南海太郎朝尊       | nannkai@gizumo.co.jp   |             2 |   35 |      1 | 2025-01-22 15:01:55 | 2025-01-22 16:07:25 |
-|        32 | 歌仙兼定           | kasen@gizumo.jp        |             1 |   31 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
-|        34 | 燭台切光忠         | shokudaigiri@gizumo.jp |             1 |   31 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
-|        33 | 和泉守兼定         | izuminokami@gizumo.jp  |             2 |   29 |      1 | 2025-01-22 15:01:55 | 2025-01-22 16:07:25 |
-|        35 | へし切長谷部       | hesikiri@gizumo.co.jp  |             2 |   28 |      1 | 2025-01-22 15:01:55 | 2025-01-22 16:07:25 |
-|        36 | 山姥切長義         | chogi@gizumo.co.jp     |             1 |   26 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:59:26 |
-|        38 | 山姥切国広         | kinihiro@gizumo.jp     |             1 |   26 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
-|        39 | 松井江             | matuigou@gizumo.jp     |             3 |   25 |      1 | 2025-01-22 15:01:55 | 2025-01-22 16:08:57 |
-|        40 | 肥前忠弘           | hizen@gizumo.co.jp     |             2 |   24 |      1 | 2025-01-22 15:01:55 | 2025-01-22 16:07:25 |
-+-----------+--------------------+------------------------+--------
+mysql> SELECT name,age FROM people WHERE gender = 1 ORDER BY age DESC;
++--------------------+------+
+| name               | age  |
++--------------------+------+
+| 早坂てつお         |   61 |
+| 福田だいすけ       |   42 |
+| 南海太郎朝尊       |   35 |
+| 三日月宗近         |   34 |
+| 歌仙兼定           |   31 |
+| 燭台切光忠         |   31 |
+| にっかり青江       |   30 |
+| 和泉守兼定         |   29 |
+| へし切長谷部       |   28 |
+| 山姥切長義         |   26 |
+| 山姥切国広         |   26 |
+| 松井江             |   25 |
+| 肥前忠弘           |   24 |
++--------------------+------+
+13 rows in set (0.00 sec)
+
+
 
 
 Q6回答
@@ -391,13 +343,6 @@ ORDER BY
 テーブルの中の`created_at`というカラムの中のレコードの数に沿って並び順を指定する
 
 Q7回答
-mysql> SELECT * FROM people WHERE age >= 20 AND age <= 29 AND gender = 2;  
-+-----------+-----------------+------------------+---------------+------+--------+---------------------+---------------------+
-| person_id | name            | email            | department_id | age  | gender | created_at          | updated_at          |
-+-----------+-----------------+------------------+---------------+------+--------+---------------------+---------------------+
-|        27 | 田中ゆうこ      | tanaka@gizumo.jp |             2 |   25 |      2 | 2025-01-22 15:01:39 | 2025-01-22 16:02:33 |
-+-----------+-----------------+------------------+---------------+------+--------+---------------------+---------------------+
-1 row in set (0.00 sec)
 
 mysql> SELECT * FROM people WHERE age >= 20 AND age <= 29 AND gender = 2
 or age >= 40 AND age <= 49 AND gender = 1;
@@ -410,16 +355,21 @@ or age >= 40 AND age <= 49 AND gender = 1;
 2 rows in set (0.00 sec)
 
 Q8回答
-mysql> SELECT * FROM people WHERE  department_id = 1 AND gender = 1 ORDER BY age DESC;
-+-----------+-----------------+------------------------+---------------+------+--------+---------------------+---------------------+
-| person_id | name            | email                  | department_id | age  | gender | created_at          | updated_at          |
-+-----------+-----------------+------------------------+---------------+------+--------+---------------------+---------------------+
-|        32 | 歌仙兼定        | kasen@gizumo.jp        |             1 |   31 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
-|        34 | 燭台切光忠      | shokudaigiri@gizumo.jp |             1 |   31 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
-|        36 | 山姥切長義      | chogi@gizumo.co.jp     |             1 |   26 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:59:26 |
-|        38 | 山姥切国広      | kinihiro@gizumo.jp     |             1 |   26 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
-+-----------+-----------------+------------------------+---------------+------+--------+---------------------+---------------------+
-4 rows in set (0.00 sec)
+mysql> SELECT * FROM people WHERE  department_id = 1 ORDER BY age DESC;
++-----------+-----------------------+------------------------+---------------+------+--------+---------------------+---------------------+
+| person_id | name                  | email                  | department_id | age  | gender | created_at          | updated_at          |
++-----------+-----------------------+------------------------+---------------+------+--------+---------------------+---------------------+
+|        29 | 豊島はなこ            | toyoshima@gizumo.jp    |             1 |   34 |      2 | 2025-01-22 15:01:39 | 2025-01-22 15:59:26 |
+|        32 | 歌仙兼定              | kasen@gizumo.jp        |             1 |   31 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
+|        34 | 燭台切光忠            | shokudaigiri@gizumo.jp |             1 |   31 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
+|        47 | にっかり青江          | aoe@gizumo.jp          |             1 |   30 |      1 | 2025-01-23 10:41:02 | 2025-01-23 10:41:02 |
+|        36 | 山姥切長義            | chogi@gizumo.co.jp     |             1 |   26 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:59:26 |
+|        38 | 山姥切国広            | kinihiro@gizumo.jp     |             1 |   26 |      1 | 2025-01-22 15:01:55 | 2025-01-22 15:01:55 |
+|        31 | 不思議沢みちこ        | NULL                   |             1 | NULL |   NULL | 2025-01-22 15:01:39 | 2025-01-22 15:59:26 |
+|        37 | 一文字則宗            | NULL                   |             1 | NULL |   NULL | 2025-01-22 15:01:55 | 2025-01-22 15:59:26 |
++-----------+-----------------------+------------------------+---------------+------+--------+---------------------+---------------------+
+8 rows in set (0.00 sec)
+
 
 Q9回答
 mysql> SELECT AVG(age) AS average_age FROM people GROUP BY  department_id = 2 AND gender = 2;
